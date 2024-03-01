@@ -15,10 +15,16 @@ export default createStore({
         },
         logoutUser(state){
             state.user = null;
+        },
+        setLikes(state, bookmarkIds){
+            state.user.likes = bookmarkIds;
         }
     },
     getters: {
         _isAuthenticated : state => state.user != null,
+        _currentUserId: state => state?.user?.id,
+        _userLikes: state => state?.user?.likes || [],
+        _userBookmarks: state => state?.user?.bookmarks || [],
         _getCurrentUser(state){
             const user = state.user;
             delete user?.password;

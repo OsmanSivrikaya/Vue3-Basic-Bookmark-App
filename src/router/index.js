@@ -19,7 +19,7 @@ const routes = [
   },
   {
     name: "NewBookmarkPage",
-    path: "/register",
+    path: "/new",
     component: () => import("@/views/NewBookmark.vue"),
   },
 ]
@@ -29,15 +29,18 @@ const router = createRouter({
   history: createWebHashHistory()
 });
 
+
 router.beforeEach((to, from, next) => {
-  const authoRequiredRoutes = ["HomePage"];
-  const authNotRequiredRoutes =  ["LoginPage", "RegisterPage"];
+  
   const _isAuthenticated = store.getters._isAuthenticated;
 
-  if(authNotRequiredRoutes.indexOf(to.name) && _isAuthenticated) next(false);
-  if(authoRequiredRoutes.indexOf(to.name)> - 1){
-    if(_isAuthenticated) next();
-    else next({name:"LoginPage"});
+  const authNotRequiredRoutes =  ["LoginPage", "RegisterPage"];
+  // eğer kişi authenticated ise logine sayfalarına giremesin
+  if(authNotRequiredRoutes.indexOf(to.name) > -1 && _isAuthenticated) next(false);
+
+  const authoRequiredRoutes = ["HomePage"];
+  if(authoRequiredRoutes.indexOf(to.name)> -1){
+    _isAuthenticated ? next() : next({name: "LoginPage"});
   }
   else{
     next();
