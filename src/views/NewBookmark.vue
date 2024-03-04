@@ -44,6 +44,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
+
 export default {
   data() {
     return {
@@ -74,6 +75,7 @@ export default {
       this.$appAxios.post("/bookmarks", saveData).then(res => {
         if(res.status == 201){
           Object.keys(this.userData)?.forEach(field => (this.userData[field] = null));
+          this.$socket.emit("NEW_BOOKMARK_EVENT",res.data);
           this.$router.push({name: "HomePage"});
         }
       })

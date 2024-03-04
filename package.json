@@ -13,6 +13,7 @@
     "crypto-js": "^4.2.0",
     "moment": "^2.30.1",
     "secure-ls": "^1.2.6",
+    "socket.io-client": "^4.7.4",
     "vue": "^3.2.13",
     "vue-router": "^4.0.13",
     "vuex": "^4.1.0",

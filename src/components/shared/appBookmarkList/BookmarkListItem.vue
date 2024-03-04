@@ -10,7 +10,7 @@
       <div class="flex items-center justify-center mt-2 gap-x-1">
         <button
           class="like-btn group"
-          :class="{ 'like-item-active': allreadyLiked }"
+          :class="{ 'like-item-active': alreadyLiked }"
           @click="likeItem"
         >
           <svg
@@ -26,7 +26,10 @@
             />
           </svg>
         </button>
-        <button class="bookmark-btn group bookmark-item-active">
+        <button 
+          class="bookmark-btn group"
+          :class="{'bookmark-item-active': alreadyBookmarked}"
+          @click="bookmarkItem">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="fill-current group-hover:text-white"
@@ -81,31 +84,62 @@ export default {
   },
   methods: {
     likeItem() {
-      let likes = [...this._userLikes];
-      if (!this.allreadyLiked) {
-        likes = [...likes, this.item.id];
-      } else {
-        likes = likes.filter((l) => l != this.item.id);
-      }
-
-      this.$appAxios
-        .patch(`/users/${this._currentUserId}`, { likes })
-        .then(() => {
-          this.$store.commit("setLikes", likes);
-        });
+      this.$appAxios({
+        url : this.alreadyLiked ? `/user_likes/${this.likedItem.id}` : '/user_likes',
+        method: this.alreadyLiked ? 'DELETE' : 'POST',
+        data: {
+          userId : this._currentUserId,
+          bookmarkId : this.item.id
+        }
+      }).then(res => {
+        let likes = [ ... this._userLikes];
+        if(this.alreadyLiked){
+          likes = likes.filter(x => x.id != this.likedItem.id);
+        }else{
+          likes = [... likes, res.data]
+        }
+        this.$store.commit("setLikes", likes);
+      });
+    },
+    bookmarkItem() {
+      this.$appAxios({
+        url : this.allreadyBookmarked ? `/user_bookmarks/${this.bookmarkedItem.id}` : '/user_bookmarks',
+        method: this.allreadyBookmarked ? 'DELETE' : 'POST',
+        data: {
+          userId : this._currentUserId,
+          bookmarkId : this.item.id
+        }
+      }).then(res => {
+        let bookmarks = [ ... this._userBookmarks];
+        if(this.allreadyBookmarked){
+          bookmarks = bookmarks.filter(x => x.id != this.bookmarkedItem.id);
+        }else{
+          bookmarks = [... bookmarks, res.data]
+        }
+        this.$store.commit("setBookmarks", bookmarks);
+      });
     },
   },
   computed: {
     categoryName() {
       return this.item?.category?.name || "-";
     },
-    allreadyLiked() {
-      return this._userLikes?.indexOf(this.item.id) > -1;
+    alreadyLiked() {
+      return Boolean(this.likedItem);
+    },
+    alreadyBookmarked() {
+      return Boolean(this.bookmarkedItem);
+    },
+    bookmarkedItem(){
+      return this._userBookmarks?.find(x => x.bookmarkId == this.item.id);
+    },
+    likedItem(){
+      return this._userLikes?.find(x => x.bookmarkId == this.item.id);
     },
     userFullname() {
       return this.item?.user?.fullname || "-";
     },
-    ...mapGetters(["_currentUserId", "_userLikes"]),
+    ...mapGetters(["_currentUserId", "_userLikes", "_userBookmarks"]),
   },
 };
 </script>

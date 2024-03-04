@@ -4,22 +4,43 @@
       "id": "5063",
       "username": "adfdasf",
       "fullname": "asdf",
-      "password": "U2FsdGVkX19gMZTA8lzRHX4e9WIRr+5JRWWsTztsLP0=",
-      "likes": []
+      "password": "U2FsdGVkX19gMZTA8lzRHX4e9WIRr+5JRWWsTztsLP0="
     },
     {
       "id": "bdc7",
       "username": "osmans",
       "fullname": "osman sivrikaya",
-      "password": "682d0c21835b9cb5cbdbb71076c7846dccd42b44",
-      "likes": []
+      "password": "682d0c21835b9cb5cbdbb71076c7846dccd42b44"
     },
     {
       "id": "bbd5",
       "username": "medines",
       "fullname": "medine gül sivrikaya",
-      "password": "682d0c21835b9cb5cbdbb71076c7846dccd42b44",
-      "likes": []
+      "password": "682d0c21835b9cb5cbdbb71076c7846dccd42b44"
+    }
+  ],
+  "user_bookmarks": [
+    {
+      "id": "b4c3",
+      "userId": "bdc7",
+      "bookmarkId": "678f"
+    },
+    {
+      "id": "255b",
+      "userId": "bdc7",
+      "bookmarkId": "33b9"
+    }
+  ],
+  "user_likes": [
+    {
+      "id": "145e",
+      "userId": "bdc7",
+      "bookmarkId": "678f"
+    },
+    {
+      "id": "b182",
+      "userId": "bdc7",
+      "bookmarkId": "33b9"
     }
   ],
   "bookmarks": [
@@ -58,6 +79,42 @@
       "description": null,
       "userId": "bdc7",
       "created_at": "2024-03-01T08:21:24.383Z"
+    },
+    {
+      "id": "aa08",
+      "title": "Deneme",
+      "url": "www.deneme.com",
+      "categoryId": "4",
+      "description": "aadsasdf",
+      "userId": "bdc7",
+      "created_at": "2024-03-04T11:42:58.932Z"
+    },
+    {
+      "id": "bd7d",
+      "title": "Deneme",
+      "url": "www.deneme.net",
+      "categoryId": "6",
+      "description": "asdsad",
+      "userId": "bdc7",
+      "created_at": "2024-03-04T11:49:56.756Z"
+    },
+    {
+      "id": "f034",
+      "title": "Deneme 2",
+      "url": "www.denem2.com",
+      "categoryId": "2",
+      "description": "asdasd",
+      "userId": "bdc7",
+      "created_at": "2024-03-04T12:02:30.741Z"
+    },
+    {
+      "id": "5364",
+      "title": "sdfgsdf",
+      "url": "gdsfgsd",
+      "categoryId": "2",
+      "description": "sfdgsdfg",
+      "userId": "bdc7",
+      "created_at": "2024-03-04T12:02:42.386Z"
     }
   ],
   "categories": [
