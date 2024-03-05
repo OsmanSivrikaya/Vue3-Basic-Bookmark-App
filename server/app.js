@@ -22,8 +22,14 @@ server.listen(PORT, () => {
         console.log(socket.id)
 
         socket.emit("WELCOME_MESSAGE", `${socket.id} Hoşgeldin.`);
+
         socket.on("NEW_BOOKMARK_EVENT",(bookmark) => {
-            io.emit("NEW_BOOKMARK_ADDED", bookmark)
+
+            // herkese gönderen kişi dahil mesajı bildirir
+            //io.emit("NEW_BOOKMARK_ADDED", bookmark)
+
+            // gönderen kişi hariç herkese mesajı bildirir
+            socket.broadcast.emit("NEW_BOOKMARK_ADDED", bookmark)
         })
     })
 })
