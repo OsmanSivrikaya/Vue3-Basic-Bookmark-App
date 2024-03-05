@@ -103,15 +103,15 @@ export default {
     },
     bookmarkItem() {
       this.$appAxios({
-        url : this.allreadyBookmarked ? `/user_bookmarks/${this.bookmarkedItem.id}` : '/user_bookmarks',
-        method: this.allreadyBookmarked ? 'DELETE' : 'POST',
+        url : this.alreadyBookmarked ? `/user_bookmarks/${this.bookmarkedItem.id}` : '/user_bookmarks',
+        method: this.alreadyBookmarked ? 'DELETE' : 'POST',
         data: {
           userId : this._currentUserId,
           bookmarkId : this.item.id
         }
       }).then(res => {
         let bookmarks = [ ... this._userBookmarks];
-        if(this.allreadyBookmarked){
+        if(this.alreadyBookmarked){
           bookmarks = bookmarks.filter(x => x.id != this.bookmarkedItem.id);
         }else{
           bookmarks = [... bookmarks, res.data]
